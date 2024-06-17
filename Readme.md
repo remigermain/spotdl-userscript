@@ -1,7 +1,8 @@
 <div align="center">
-# Spotdl Web script
-
+<h1>Spotdl Web script</h1>
+ 
 ![preview](./_images/preview.png)
+
 </div>
 
 ______________________________________________________________________
