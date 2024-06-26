@@ -2,13 +2,13 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import subprocess
 import multiprocessing
-from pathlib import Path
-import argparse
+import sys
 
-def download(url, output):
-    print(f"Start download {url=}")
-    res = subprocess.run(["spotdl", "download", url, "--output", flags.output], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print(f"[{'OK' if res else 'KO'}] {url=}")
+
+def download(url):
+    print(f"Start download {url!r}")
+    res = subprocess.run(["spotdl", sys.argv[1], url, *sys.argv[2:]], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print(f"[{'OK' if res else 'KO'}] {url!r}")
     if res.stderr:
         print(res.stderr)
 
@@ -26,14 +26,23 @@ class SpotdlServer(BaseHTTPRequestHandler):
         content_len = int(self.headers['content-length'])
         data = json.loads(self.rfile.read(content_len).decode())
 
-        multiprocessing.Process(target=download, args=(data['url'], flags.output), daemon=True).start()
+        multiprocessing.Process(target=download, args=(data['url'],), daemon=True).start()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("spodl-web")
-    parser.add_argument("--output", default="~/Music/spotdl-web")
-    flags = parser.parse_args()
+    from spotdl.utils.arguments import parse_arguments
+    import os
 
-    flags.output = str(Path(flags.output).expanduser())
+    # auto add spotdl download arguements
+    sys.argv = [
+        sys.argv[0],
+        "download",
+        *sys.argv[1:]
+    ]
+
+    # try parse spotdl arguements
+    flags = parse_arguments()
+    if not flags.output:
+        flags.output = os.path.dirname(os.path.abspath(__file__))
 
     webServer = HTTPServer(("localhost", 56938), SpotdlServer)
     host, port = webServer.server_address
