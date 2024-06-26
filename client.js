@@ -111,7 +111,8 @@
 
   const btnListen = (el, actionListen, options) => {
     const b = stylEl(document.createElement("a"), options)
-    b.href = `https://www.youtube.com/results?search_query=${actionListen(el).replaceAll(/\s+/ig, "+")}`,
+    const query = encodeURIComponent(actionListen(el))
+    b.href = `https://www.youtube.com/results?search_query=${query}`,
     b.target = '_blank',
     b.rel = 'noopener noreferrer',
     b.innerHTML = `<svg style="color: black;" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-headphones"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 13m0 2a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2z" /><path d="M15 13m0 2a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2z" /><path d="M4 15v-3a8 8 0 0 1 16 0v3" /></svg>`
