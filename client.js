@@ -105,17 +105,20 @@
     b.innerHTML = `<svg style="color: black;" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>`
     const url = action(el)
     b.onclick = () => download(url);
-    b.title = url;
+    b.title = `download song`;
     return b
   }
 
   const btnListen = (el, actionListen, options) => {
     const b = stylEl(document.createElement("a"), options)
+    b.style.backgroundColor = "white"
+    b.style.color = "#ff0033"
     const query = encodeURIComponent(actionListen(el))
     b.href = `https://www.youtube.com/results?search_query=${query}`,
     b.target = '_blank',
     b.rel = 'noopener noreferrer',
-    b.innerHTML = `<svg style="color: black;" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-headphones"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 13m0 2a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2z" /><path d="M15 13m0 2a2 2 0 0 1 2 -2h1a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-1a2 2 0 0 1 -2 -2z" /><path d="M4 15v-3a8 8 0 0 1 16 0v3" /></svg>`
+      b.innerHTML = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-brand-youtube"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1 -5 5h-12a5 5 0 0 1 -5 -5v-8a5 5 0 0 1 5 -5zm-9 6v6a1 1 0 0 0 1.514 .857l5 -3a1 1 0 0 0 0 -1.714l-5 -3a1 1 0 0 0 -1.514 .857z" /></svg>`
+    b.title = "search on youtube"
     return b
   }
 
@@ -167,6 +170,11 @@
     },
     artist: {
       query: [`[data-testid="artist-page"] [data-testid="action-bar-row"]`],
+      download: downloadUrl,
+      style: "border-radius: 9999px; height: 56px; width: 56px; margin-right: 1rem;"
+    },
+    album: {
+      query: [`[data-testid="album-page"] [data-testid="action-bar-row"]`],
       download: downloadUrl,
       style: "border-radius: 9999px; height: 56px; width: 56px; margin-right: 1rem;"
     },
