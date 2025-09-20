@@ -13,7 +13,7 @@ This script add buttons in web spotify to easier download/lisent music through [
  - You need `python3`
  - You need [spotdl](https://github.com/spotDL/spotify-downloader?tab=readme-ov-file#installation)
  - Add [tampermonkey](https://www.tampermonkey.net/) in your web browser
- - Add the client.js script in `tampermonkey`
+ - Add the [client.user.js](https://github.com/remigermain/spotdl-userscript/raw/refs/heads/main/spodtl.user.js) script in `tampermonkey` 
 
 ### Usage
 run the spotdl interaction server
