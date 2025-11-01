@@ -17,12 +17,27 @@ This script add buttons in web spotify to easier download/lisent music through [
 
 ### Usage
 run the spotdl interaction server
+
 ```sh
+# example with uv
 python3 server.py
 
 # you can add any spotdl arguements ( no need to add "download" command)
 python3 server.py --help
 python3 server.py --sponsor-block --output ~/My/Music --auth-token 4454 ...
+```
+
+#### With uv
+```sh
+# example with uv
+
+uv venv -p 3.13
+source .venv/bin/activate
+uv run server.py
+
+# you can add any spotdl arguements ( no need to add "download" command)
+uv run server.py --help
+uv run server.py --sponsor-block --output ~/My/Music --auth-token 4454 ...
 ```
 
 go to your web browser https://open.spotify.com, and have fun !
